@@ -74,15 +74,15 @@ class LiveChat extends events_1.EventEmitter {
         }
         const items = res.data.continuationContents.liveChatContinuation.actions.slice(0, -1)
             .filter((v) => {
-            const messageRenderer = parser_1.actionToRenderer(v);
+            const messageRenderer = (0, parser_1.actionToRenderer)(v);
             if (messageRenderer !== null) {
                 if (messageRenderer) {
-                    return parser_1.usecToTime(messageRenderer.timestampUsec) > this.prevTime;
+                    return (0, parser_1.usecToTime)(messageRenderer.timestampUsec) > this.prevTime;
                 }
             }
             return false;
         })
-            .map((v) => parser_1.parseData(v));
+            .map((v) => (0, parser_1.parseData)(v));
         items.forEach((v) => {
             this.emit('comment', v);
         });
